@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    * {
+        margin: 0 auto;
+    }
+</style>
+
+<body>
+    <img src="./1.png" alt="heheh">
+    <p> 如图所示：从一块区域中，随便引出一个点，</p>
+      <p> 这个点与所绘制线的交点方向，</p> 
+    <p>假设任意一个方向为+1或者-1，相反方向为-1</p>
+    <p>将这些点结果相加，结果不为0则被fill填充</p>
+    
+    <canvas class="canvas" style="margin:-200px  500px ; border:1px solid #aaa;"></canvas>
+</body>
+
+
+<script>
+    // 非零环绕原则   fill填充复杂区域时根据数学上非零环绕原则
+
+    window.onload = (function () {
+        var canvas = document.querySelector('canvas');
+        canvas.width = 800;
+        canvas.height = 800;
+        var context = canvas.getContext('2d');
+
+        context.beginPath();
+        context.rect(100, 100, 600, 600);
+        pathRect(context,160,160,200,200);
+        pathTriangle(context,300,450,150,650,450,650)
+        context.arc(500, 400, 100, Math.PI / 180 * 0, Math.PI / 180 * 360, true);
+        
+
+        context.fillStyle = '#058';
+        context.shadowColor = 'gray';
+        context.shadowOffsetX = 10;
+        context.shadowOffsetY = 10;
+        context.shadowBlur = 20;
+        context.fill();
+    })
+
+    function pathRect(context, x, y, width, height) {
+        context.moveTo(x, y);
+        context.lineTo(x, y + height);
+        context.lineTo(x + width, y + height);
+        context.lineTo(x + width, y);
+        context.closePath();
+    }
+
+
+    function pathTriangle(context, x1, y1, x2, y2, x3, y3) {
+        context.moveTo(x1, y1);
+        context.lineTo(x2, y2);
+        context.lineTo(x3, y3);
+        context.closePath();
+    }
+
+</script>
+
+</html>
